@@ -20,8 +20,10 @@ int main(void)
 	mADC1.enableADC();
 
     while(1)
-    {	delay(1000);
-    	GPIOB->ODR ^= GPIO_ODR_ODR5;
+    {
+    	GPIOB->ODR |= GPIO_ODR_ODR5;
+    	delay(1000);
+    	GPIOB->ODR &= ~GPIO_ODR_ODR5;
     	delay(1000);
     }
 }
