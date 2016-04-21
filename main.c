@@ -2,10 +2,14 @@
 #include "ADC.h"
 #include "PWM.h"
 #include "Delay.h"
+#include "step_motor.h"
+#include  "locator.h"
 
 void initGPIO();
 
 static const uint32_t Period = 1000;
+
+volatile double dist = 0;
 
 uint32_t cnt = 0;
 
@@ -13,18 +17,21 @@ int main(void)
 {
 	initGPIO();
 
-	mPWM1.initPWM();
-	mPWM1.setPeriod(Period);
-	mPWM1.enablePWM();
-	mADC1.initADC();
-	mADC1.enableADC();
-
+	//mPWM1.initPWM();
+	//mPWM1.setPeriod(Period);
+	//mPWM1.enablePWM();
+	//mADC1.initADC();
+	//mADC1.enableADC();
+	//Motor.init();
+	//Motor.turning(0);
+	locator.init();
     while(1)
     {
-    	GPIOB->ODR |= GPIO_ODR_ODR5;
-    	delay(1000);
-    	GPIOB->ODR &= ~GPIO_ODR_ODR5;
-    	delay(1000);
+    	//GPIOB->ODR ^= GPIO_ODR_ODR5;
+    	//delay(3000);
+    	locator.mesure();
+    	dist = locator.getDist();
+
     }
 }
 
