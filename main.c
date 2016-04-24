@@ -17,11 +17,11 @@ int main(void)
 {
 	initGPIO();
 
-	//mPWM1.initPWM();
-	//mPWM1.setPeriod(Period);
-	//mPWM1.enablePWM();
-	//mADC1.initADC();
-	//mADC1.enableADC();
+	mPWM1.initPWM();
+	mPWM1.setPeriod(Period);
+	mPWM1.enablePWM();
+	mADC1.initADC();
+	mADC1.enableADC();
 	//Motor.init();
 	//Motor.turning(0);
 	locator.init();
@@ -29,7 +29,7 @@ int main(void)
     {
     	//GPIOB->ODR ^= GPIO_ODR_ODR5;
     	//delay(3000);
-    	locator.mesure();
+    	//locator.mesure();
     	dist = locator.getDist();
 
     }
