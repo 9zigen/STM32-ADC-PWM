@@ -1,4 +1,5 @@
 #include "ADC.h"
+#include "step_motor.h"
 
 static uint32_t adc1 = 0;
 
@@ -40,10 +41,11 @@ static uint32_t getResult(){
 
 void ADC1_2_IRQHandler(void){
 
+	  ADC1->SR &= ~ADC_SR_JEOC;
 	  adc1 = ADC1->JDR1;
 	  double p = (double)adc1 / 4000;
 	  mPWM1.setPercent(1000 * p);
-	  ADC1->SR &= ~ADC_SR_JEOC;
+
 
 }
 

@@ -22,8 +22,11 @@ static void outPin(uint16_t pin, int8_t cmd){
 
 static void turning(int _corner){
 
-	uint16_t pin[]= {GPIO_ODR_ODR2, GPIO_ODR_ODR3,GPIO_ODR_ODR4, GPIO_ODR_ODR5};
-	int8_t seq[][4] = { {1,0,0,0},
+	 static int i = 0;
+	 static int j = 0;
+	 static int k = 0;
+	 static uint16_t pin[]= {GPIO_ODR_ODR2, GPIO_ODR_ODR3,GPIO_ODR_ODR4, GPIO_ODR_ODR5};
+	 static int8_t seq[][4] = { {1,0,0,0},
 	        {1,1,0,0},
 	        {0,1,0,0},
 	        {0,1,1,0},
@@ -32,16 +35,22 @@ static void turning(int _corner){
 	        {0,0,0,1},
 	        {1,0,0,1} };
 
-   for(int i = 0; i < 512; i++){
-	   for(int j =0; j < 8; j++){
-		   for(int k = 0; k < 4; k++){
-			   outPin(pin[k], seq[j][k]);
+
+
+   for( i = 0; i < 512; i++){
+	   for( j =0; j < 8; j++){
+		   for( k = 0; k < 4; k++){
+			   if(_corner == 1)
+				   outPin(pin[k], seq[j][k]);
+			   else if(_corner == 0)
+				   outPin(pin[k], seq[7-j][k]);
 		   }
-		   delay(100);
+		   delay(100000);
 	   }
    }
-
+   i = j = k = 0;
    GPIOE->ODR &= ~(GPIO_ODR_ODR2 | GPIO_ODR_ODR3 | GPIO_ODR_ODR4 | GPIO_ODR_ODR5);
+
 }
 
 

@@ -22,14 +22,12 @@ int main(void)
 	mPWM1.enablePWM();
 	mADC1.initADC();
 	mADC1.enableADC();
-	//Motor.init();
-	//Motor.turning(0);
+	Motor.init();
 	locator.init();
+	//Motor.turning(0);
     while(1)
     {
-    	//GPIOB->ODR ^= GPIO_ODR_ODR5;
-    	//delay(3000);
-    	//locator.mesure();
+    	Motor.turning(1);
     	dist = locator.getDist();
 
     }
